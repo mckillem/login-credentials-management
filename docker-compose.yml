@@ -1,0 +1,22 @@
+services:
+  db:
+    container_name: login-credentials-management
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+    volumes:
+      - login-credentials-management:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - login-credentials-management
+    restart: unless-stopped
+
+networks:
+  login-credentials-management:
+    driver: bridge
+
+volumes:
+  login-credentials-management:
