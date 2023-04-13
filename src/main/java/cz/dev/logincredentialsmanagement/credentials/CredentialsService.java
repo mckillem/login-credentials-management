@@ -3,6 +3,7 @@ package cz.dev.logincredentialsmanagement.credentials;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -13,5 +14,10 @@ public class CredentialsService {
 
 	public List<Credentials> getAllCredentials() {
 		return credentialsRepository.findAll();
+	}
+
+	public void addCredentials(Credentials credentials) {
+		credentials.setCreatedAt(LocalDateTime.now());
+		credentialsRepository.save(credentials);
 	}
 }
