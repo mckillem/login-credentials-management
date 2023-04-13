@@ -14,14 +14,25 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(toBuilder = true)
 public class Credentials {
 
 	@Id
-	private UUID id = UUID.randomUUID();
+	private UUID id;
 	private String url;
 	private String email;
 	private String password;
 	private LocalDateTime createdAt;
-	private UUID archiveConnectionId = UUID.randomUUID();
+	private UUID archiveConnectionId;
+
+	public static Credentials addNew(Credentials credentials) {
+		return Credentials
+				.builder()
+				.id(UUID.randomUUID())
+				.url(credentials.getUrl())
+				.email(credentials.getEmail())
+				.password(credentials.getPassword())
+				.createdAt(LocalDateTime.now())
+				.build();
+	}
 }

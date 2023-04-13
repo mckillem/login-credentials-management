@@ -23,7 +23,24 @@ public class CredentialsService {
 	}
 
 	public void addCredentials(Credentials credentials) {
-		credentials.setCreatedAt(LocalDateTime.now());
-		credentialsRepository.save(credentials);
+		if (credentials.getId() == null) {
+			credentialsRepository.save(Credentials.addNew(credentials));
+		} else {
+			UUID oldId = credentials.getId();
+			Credentials newCredentials = Credentials.addNew(credentials);
+			UUID newId = newCredentials.getId();
+			credentialsRepository.save(newCredentials);
+
+			Optional<Credentials> oldCredentials = getCredentials(oldId);
+
+			if (oldCredentials.isPresent()) {
+//				todo: jak přesně řádky pod tímhle fungují?
+				credentialsRepository.save(oldCredentials.get()
+						.toBuilder()
+						.archiveConnectionId(newId)
+						.build());
+			}
+		}
+
 	}
 }
