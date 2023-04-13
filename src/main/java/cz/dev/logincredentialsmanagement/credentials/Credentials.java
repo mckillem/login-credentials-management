@@ -23,7 +23,5 @@ public class Credentials {
 	private String email;
 	private String password;
 	private LocalDateTime createdAt;
-	//TODO: jaký typ tu bude? Potřebuju to tu teď?
-//	private createdBy;
-	private Long archiveConnectionId;
+	private UUID archiveConnectionId = UUID.randomUUID();
 }

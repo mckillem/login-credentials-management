@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -15,6 +17,11 @@ public class CredentialsController {
 	@GetMapping
 	public List<Credentials> getAllCredentials() {
 		return credentialsService.getAllCredentials();
+	}
+
+	@GetMapping("/{id}")
+	public Optional<Credentials> getCredentials(@PathVariable("id") UUID id) {
+		return credentialsService.getCredentials(id);
 	}
 
 	@PostMapping
