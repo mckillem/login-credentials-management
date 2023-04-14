@@ -15,7 +15,7 @@ public class CredentialsService {
 	private final CredentialsRepository credentialsRepository;
 
 	public List<Credentials> getAllCredentials() {
-		return credentialsRepository.findAll();
+		return credentialsRepository.findAllWhereArchiveConnectionIdIsNull();
 	}
 
 	public Optional<Credentials> getCredentials(UUID id) {
