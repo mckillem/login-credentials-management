@@ -12,4 +12,6 @@ public interface CredentialsRepository extends JpaRepository<Credentials, UUID> 
 
 	@Query("select c from Credentials c where c.archiveConnectionId IS NULL")
 	List<Credentials> findAllWhereArchiveConnectionIdIsNull();
+
+	List<Credentials> findByArchiveConnectionId(UUID id);
 }

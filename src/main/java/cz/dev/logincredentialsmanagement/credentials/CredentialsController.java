@@ -24,6 +24,11 @@ public class CredentialsController {
 		return credentialsService.getCredentials(id);
 	}
 
+	@GetMapping("/{id}/archive")
+	public List<Credentials> getCredentialsArchive(@PathVariable("id") UUID id) {
+		return credentialsService.getCredentialsArchive(id);
+	}
+
 	@PostMapping
 	public void addCredentials(@RequestBody Credentials credentials) {
 		credentialsService.addCredentials(credentials);

@@ -3,7 +3,6 @@ package cz.dev.logincredentialsmanagement.credentials;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -33,14 +32,15 @@ public class CredentialsService {
 
 			Optional<Credentials> oldCredentials = getCredentials(oldId);
 
-			if (oldCredentials.isPresent()) {
-//				todo: jak přesně řádky pod tímhle fungují?
-				credentialsRepository.save(oldCredentials.get()
-						.toBuilder()
-						.archiveConnectionId(newId)
-						.build());
-			}
+			oldCredentials.ifPresent(value -> credentialsRepository.save(value
+					.toBuilder()
+					.archiveConnectionId(newId)
+					.build()));
 		}
 
+	}
+
+	public List<Credentials> getCredentialsArchive(UUID id) {
+		return credentialsRepository.findByArchiveConnectionId(id);
 	}
 }
