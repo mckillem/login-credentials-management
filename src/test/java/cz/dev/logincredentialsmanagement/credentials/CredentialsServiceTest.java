@@ -1,7 +1,6 @@
 package cz.dev.logincredentialsmanagement.credentials;
 
 import cz.dev.logincredentialsmanagement.mock.credentials.CredentialsMock;
-import jakarta.inject.Inject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
