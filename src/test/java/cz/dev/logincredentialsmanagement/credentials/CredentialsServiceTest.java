@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,7 +26,6 @@ class CredentialsServiceTest {
 	@Mock
 	private CredentialsRepository credentialsRepository;
 
-// todo: zobrazí všechny záznamy, které nejsou archiv getAllCredentials()
 	@Test
 	void getAllCredentialsWithArchiveConnectionIdIsNull() {
 		// Given
@@ -42,15 +42,18 @@ class CredentialsServiceTest {
 		verify(credentialsRepository).findAllWhereArchiveConnectionIdIsNull();
 	}
 
-//	todo: zobrazí záznam dle id getCredentials()
 	@Test
 	void getCredentials() {
 		// Given
-		Credentials all = CredentialsMock.getAll().stream().findFirst().orElse(null);
-		assertThat(all, is(not(nullValue())));
+		Credentials one = CredentialsMock.getAll().stream().findFirst().orElse(null);
+		assertThat(one, is(not(nullValue())));
 
 		// When
+		Optional<Credentials> credentialsById = credentialsService.getCredentials(one.getId());
+
 		// Then
+		assertThat(credentialsById, is(not(nullValue())));
+		verify(credentialsRepository).findById(one.getId());
 	}
 
 //	todo: přidá záznam. Pokud nebude id, tak vytvoří nový jinak dle id najde původní záznam addCredentials()
