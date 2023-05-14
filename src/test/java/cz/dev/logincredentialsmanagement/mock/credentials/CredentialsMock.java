@@ -9,10 +9,9 @@ import java.util.UUID;
 
 public class CredentialsMock {
 
-//	todo: doplnit údaje
-	private static final String URL = "";
-	private static final String EMAIL = "";
-	private static final String PASSWORD = "";
+	private static final String URL = "https://www.url.io";
+	private static final String EMAIL = "email@emailos.es";
+	private static final String PASSWORD = "elpasswordos";
 
 	public static List<Credentials> getAll() {
 
